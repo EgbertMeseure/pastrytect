@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>cookie cutter configurator · pastrytect</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 4c4 0 5 4 9 5s3 6 2 9-1 8-5 9-6-2-9-2-6 3-9 0-1-7-2-10 0-7 4-8 6-3 10-3z' fill='none' stroke='%23282512' stroke-width='3'/%3E%3C/svg%3E" />
-  <script type="module" crossorigin src="./assets/index-rwUWDuYq.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-hMEmy_XJ.css">
+  <script type="module" crossorigin src="./assets/index-C92KML1N.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-pCjZEzhC.css">
 </head>
 <body>
   <header class="topbar">
@@ -15,85 +15,57 @@
       <span class="divider"></span>
       <h1>cookie cutter configurator</h1>
     </div>
-    <div class="tagline caps">custom outline → print-ready stl</div>
+    <div class="tagline caps">pick a shape → print-ready stl</div>
   </header>
 
   <main class="layout">
     <aside class="panel" id="panel">
       <section class="block">
-        <h2>1 · outline</h2>
-        <div class="tabs" role="tablist">
-          <button class="tab caps active" data-mode="text">text</button>
-          <button class="tab caps" data-mode="image">image</button>
-        </div>
-
-        <div class="mode" data-panel="text">
-          <label class="field"><span class="lbl">word or name</span>
-            <input id="txt" type="text" value="MAXIME" maxlength="24" spellcheck="false" />
-          </label>
-          <label class="field"><span class="lbl">font</span>
-            <select id="font"></select>
-          </label>
-          <div data-range="spacing"></div>
-          <div data-range="weld"></div>
-          <label class="check"><input type="checkbox" id="bar" /> <span>connecting base bar under the letters</span></label>
-          <div data-range="barHeight" class="sub"></div>
-          <label class="check"><input type="checkbox" id="counters" /> <span>keep letter holes (cut out o, a, e…)</span></label>
-          <canvas id="textOutline" class="thumb"></canvas>
-          <p class="hint" id="textHint"></p>
-        </div>
-
-        <div class="mode hidden" data-panel="image">
-          <label class="drop" id="drop">
-            <input type="file" id="file" accept="image/png,image/jpeg,image/svg+xml,.svg,.png,.jpg,.jpeg" />
-            <span class="caps">choose png, jpg or svg</span>
-            <span class="hint">or drop a file here · dark shape on a light background works best</span>
-          </label>
-          <div class="row"><button class="btn ghost caps" id="sampleHeart">sample heart</button><button class="btn ghost caps" id="sampleStar">sample star</button></div>
-          <canvas id="imgCanvas" class="thumb"></canvas>
-          <div data-range="threshold"></div>
-          <label class="check"><input type="checkbox" id="invert" /> <span>invert (light shape on dark background)</span></label>
-          <div data-range="smooth"></div>
-          <div data-range="speck"></div>
-          <label class="check"><input type="checkbox" id="keepInner" /> <span>keep inner contours as embossing</span></label>
-          <p class="hint" id="imgHint"></p>
-        </div>
-
+        <h2>1 · shape</h2>
+        <div class="shapes" id="shapes" role="radiogroup" aria-label="shape"></div>
       </section>
 
       <section class="block">
-        <h2>2 · dimensions</h2>
+        <h2>2 · size</h2>
         <div data-range="size"></div>
-        <div data-range="height"></div>
-        <div data-range="wall"></div>
       </section>
 
       <section class="block">
-        <h2>3 · cutting edge</h2>
-        <label class="check"><input type="checkbox" id="taperOn" checked /> <span>thin tapered cutting edge</span></label>
-        <div data-range="tip" class="sub"></div>
-        <div data-range="taperLen" class="sub"></div>
+        <h2>3 · height</h2>
+        <div class="seg" id="heightSeg" role="radiogroup" aria-label="height"></div>
+        <p class="hint" id="heightHint"></p>
       </section>
 
       <section class="block">
-        <h2>4 · grip rim</h2>
-        <label class="check"><input type="checkbox" id="rimOn" checked /> <span>flange rim (printed on the bed)</span></label>
-        <div data-range="rimWidth" class="sub"></div>
-        <div data-range="rimThick" class="sub"></div>
+        <h2>4 · cutting edge</h2>
+        <div class="seg" id="edgeSeg" role="radiogroup" aria-label="cutting edge"></div>
+        <p class="hint" id="edgeHint"></p>
       </section>
 
       <section class="block">
-        <h2>5 · embossing</h2>
-        <label class="check"><input type="checkbox" id="embossOn" /> <span>imprint inner lines (image inner contours / letters)</span></label>
-        <div data-range="embossWidth" class="sub"></div>
-        <div data-range="embossGap" class="sub"></div>
-        <p class="hint">Imprint walls hang from the rim, held by thin bridges, and stop short of the cutting edge.</p>
+        <h2>5 · cutters in a row</h2>
+        <div class="seg count" id="countSeg" role="radiogroup" aria-label="cutters in a row"></div>
+        <p class="hint" id="countHint"></p>
       </section>
 
       <section class="block">
-        <h2>6 · orientation</h2>
-        <label class="check"><input type="checkbox" id="mirror" checked /> <span>mirror for printing, so the cookie reads the right way</span></label>
-        <p class="hint">The cutter prints rim-down and is flipped over to use, so text and asymmetric shapes are mirrored in the print view. Use “in use” to check.</p>
+        <details class="more" id="more">
+          <summary><span>detailed adjustments</span><em class="caps" id="moreState">closed</em></summary>
+          <div class="more-body">
+            <div data-range="height"></div>
+            <div data-range="wall"></div>
+            <label class="check"><input type="checkbox" id="taperOn" checked /> <span>thin tapered cutting edge</span></label>
+            <div data-range="tip" class="sub"></div>
+            <div data-range="taperLen" class="sub"></div>
+            <label class="check"><input type="checkbox" id="rimOn" checked /> <span>grip rim (printed on the bed)</span></label>
+            <div data-range="rimWidth" class="sub"></div>
+            <div data-range="rimThick" class="sub"></div>
+            <div data-range="spacing"></div>
+            <label class="check"><input type="checkbox" id="mirror" checked /> <span>mirror for printing, so the cookie comes out the right way round</span></label>
+            <p class="hint">Cutters in a row share one grip plate, so they print and cut as one piece. Without a rim they are still joined by a connecting bridge. The cutter prints rim-down and is flipped to use; asymmetric shapes (heart, egg, shield, cloud) are mirrored in the print view. Use “in use” to check.</p>
+            <button class="btn ghost caps" id="resetDetail" type="button">back to presets</button>
+          </div>
+        </details>
       </section>
     </aside>
 
