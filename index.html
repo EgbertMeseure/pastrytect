@@ -87,6 +87,7 @@ a.pill:hover i{background:var(--dark)}
 .prods a:hover .rim{stroke:var(--ink)}
 .prods b{display:block;font-weight:400;font-size:12px;letter-spacing:.06em;margin-top:16px;text-transform:uppercase}
 .prods a>span{font-size:11px;color:var(--mute)}
+.prods .pr{font-size:13px;color:var(--ink);letter-spacing:.04em;margin-top:4px}
 .dash{list-style:none;font-size:12px;color:var(--mute)}
 .dash li{padding-left:18px;position:relative;margin-top:5px}
 .dash li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:1px;background:var(--ink)}
@@ -138,16 +139,6 @@ footer{padding:64px 0 40px;scroll-margin-top:20px}
 .pdp h1{margin-top:14px}
 .price{font-size:20px;margin-top:18px}
 .note{color:var(--mute);margin-top:4px;max-width:360px}
-.sizes{display:flex;gap:26px;margin-top:24px;flex-wrap:wrap}
-.sizes a{display:flex;align-items:flex-end;gap:12px;font-size:11px;letter-spacing:.1em;color:var(--mute)}
-.sizes .fw{width:38px}
-.sizes em{font-style:normal;padding-bottom:2px;border-bottom:1px solid transparent}
-.sizes .fr g{filter:brightness(.6) grayscale(.4);transition:filter .3s}
-.sizes a.on,.sizes a:hover{color:var(--ink)}
-.sizes a.on em{border-color:var(--ink)}
-.sizes a.on .fr g,.sizes a:hover .fr g{filter:none}
-.sizes .rim{stroke:rgba(239,233,226,.45)}
-.sizes a.on .rim,.sizes a:hover .rim{stroke:var(--ink)}
 .info .btns{margin-top:24px}
 .desc{margin-top:28px;font-size:13.5px;color:var(--mute);line-height:1.65}
 .desc p+p{margin-top:10px;color:var(--ink)}
@@ -399,7 +390,7 @@ body.lb-open .track{animation-play-state:paused}
       <a class="pill dsk" href="product.html#small" style="left:250px;top:235px"><i></i>glaze box small 35/33</a>
       <a class="pill dsk" href="product.html#big" style="left:560px;top:430px"><i></i>glaze box big 60/40</a>
       <span class="pill dsk" style="left:640px;top:260px">available in 2 sizes</span>
-      <span class="pill dsk" style="left:150px;top:560px">price on request</span>
+      <span class="pill dsk" style="left:150px;top:560px">big €400 · small €300</span>
       <a class="pill mob" href="product.html#small" style="left:62px;top:150px"><i></i>small 35/33</a>
       <a class="pill mob" href="product.html#big" style="left:150px;top:350px"><i></i>big 60/40</a>
     </div>
@@ -408,8 +399,8 @@ body.lb-open .track{animation-play-state:paused}
       <h2 style="margin-top:14px">the glaze box.</h2>
       <p class="sub">A fresh design. Smart functionality. More efficiency.</p>
       <div class="prods">
-        <a href="product.html#big"><span class="fw"><svg class="fr" viewBox="-6 -6 112 250" shape-rendering="geometricPrecision" role="img" aria-label="Glaze Box Big 60/40"><g clip-path="url(#symclip)"><rect class="bgr" width="100" height="238"/><use class="ph" href="#ph-big"/></g><path class="rim" d="M-5 243V45A50 50 0 0 1 45 -5H105V193A50 50 0 0 1 55 243Z" vector-effect="non-scaling-stroke"/></svg></span><b>big 60/40</b><span>price on request</span></a>
-        <a href="product.html#small"><span class="fw"><svg class="fr" viewBox="-6 -6 112 250" shape-rendering="geometricPrecision" role="img" aria-label="Glaze Box Small 35/33 next to the Big"><g clip-path="url(#symclip)"><rect class="bgr" width="100" height="238"/><use class="ph" href="#ph-small"/></g><path class="rim" d="M-5 243V45A50 50 0 0 1 45 -5H105V193A50 50 0 0 1 55 243Z" vector-effect="non-scaling-stroke"/></svg></span><b>small 35/33</b><span>price on request</span></a>
+        <a href="product.html#big"><span class="fw"><svg class="fr" viewBox="-6 -6 112 250" shape-rendering="geometricPrecision" role="img" aria-label="Glaze Box Big 60/40"><g clip-path="url(#symclip)"><rect class="bgr" width="100" height="238"/><use class="ph" href="#ph-big"/></g><path class="rim" d="M-5 243V45A50 50 0 0 1 45 -5H105V193A50 50 0 0 1 55 243Z" vector-effect="non-scaling-stroke"/></svg></span><b>big 60/40</b><span class="pr">€400</span></a>
+        <a href="product.html#small"><span class="fw"><svg class="fr" viewBox="-6 -6 112 250" shape-rendering="geometricPrecision" role="img" aria-label="Glaze Box Small 35/33 next to the Big"><g clip-path="url(#symclip)"><rect class="bgr" width="100" height="238"/><use class="ph" href="#ph-small"/></g><path class="rim" d="M-5 243V45A50 50 0 0 1 45 -5H105V193A50 50 0 0 1 55 243Z" vector-effect="non-scaling-stroke"/></svg></span><b>small 35/33</b><span class="pr">€300</span></a>
       </div>
       <ul class="dash"><li>removable wire glazing grid</li><li>corner pour spout</li><li>palette-knife holder on the side</li></ul>
       <a class="btn solid" href="product.html">shop the glaze box <span aria-hidden="true">→</span></a>
