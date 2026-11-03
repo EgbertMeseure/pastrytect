@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>cookie cutter configurator · pastrytect</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 4c4 0 5 4 9 5s3 6 2 9-1 8-5 9-6-2-9-2-6 3-9 0-1-7-2-10 0-7 4-8 6-3 10-3z' fill='none' stroke='%23282512' stroke-width='3'/%3E%3C/svg%3E" />
-  <script type="module" crossorigin src="./assets/index-C92KML1N.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-pCjZEzhC.css">
+  <script type="module" crossorigin src="./assets/main-NRwGae0X.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/app-B_Iy6KU2.js">
+  <link rel="stylesheet" crossorigin href="./assets/app-qhjXAmVl.css">
 </head>
 <body>
   <header class="topbar">
@@ -15,14 +16,59 @@
       <span class="divider"></span>
       <h1>cookie cutter configurator</h1>
     </div>
-    <div class="tagline caps">pick a shape → print-ready stl</div>
+    <div class="tagline caps">pick a shape → made-to-order cutter</div>
   </header>
 
   <main class="layout">
     <aside class="panel" id="panel">
       <section class="block">
         <h2>1 · shape</h2>
-        <div class="shapes" id="shapes" role="radiogroup" aria-label="shape"></div>
+        <div class="tabs three" id="srcTabs" role="tablist">
+          <button class="tab caps active" data-src="preset" role="tab" type="button">classic shapes</button>
+          <button class="tab caps" data-src="image" role="tab" type="button">image</button>
+          <button class="tab caps" data-src="text" role="tab" type="button">text</button>
+        </div>
+        <div class="src-panel" data-panel="preset">
+          <div class="shapes" id="shapes" role="radiogroup" aria-label="shape"></div>
+        </div>
+        <div class="src-panel hidden" data-panel="text">
+          <label class="field"><span class="lbl">word or name (max 24 characters)</span>
+            <input id="txt" type="text" value="MAXIME" maxlength="24" spellcheck="false" autocomplete="off" />
+          </label>
+          <label class="field"><span class="lbl">font</span><select id="font"></select></label>
+          <canvas id="textOutline" class="thumb"></canvas>
+          <p class="hint" id="textHint"></p>
+          <details class="more mini" id="textMore">
+            <summary><span>text options</span></summary>
+            <div class="more-body">
+              <div data-range="letterSpacing"></div>
+              <div data-range="weld"></div>
+              <label class="check"><input type="checkbox" id="bar" /> <span>connecting bar under the letters</span></label>
+              <div data-range="barHeight" class="sub"></div>
+              <label class="check"><input type="checkbox" id="holes" /> <span>keep letter holes (cut out o, a, e…)</span></label>
+            </div>
+          </details>
+        </div>
+        <div class="src-panel hidden" data-panel="image">
+          <label class="drop" id="drop">
+            <input type="file" id="file" accept="image/png,image/jpeg,image/svg+xml,.svg,.png,.jpg,.jpeg" />
+            <span class="caps">choose png, jpg or svg</span>
+            <span class="hint">or drop a file here · dark shape on a light background works best</span>
+          </label>
+          <div class="row"><button class="btn ghost caps" id="sampleHeart" type="button">sample heart</button><button class="btn ghost caps" id="sampleStar" type="button">sample star</button></div>
+          <canvas id="imgCanvas" class="thumb"></canvas>
+          <div data-range="threshold"></div>
+          <label class="check"><input type="checkbox" id="invert" /> <span>invert (light shape on dark background)</span></label>
+          <p class="hint" id="imgHint"></p>
+          <details class="more mini" id="imageMore">
+            <summary><span>image options</span></summary>
+            <div class="more-body">
+              <div data-range="smooth"></div>
+              <div data-range="speck"></div>
+              <label class="check"><input type="checkbox" id="keepInner" /> <span>keep inner contours as embossing</span></label>
+            </div>
+          </details>
+        </div>
       </section>
 
       <section class="block">
@@ -44,7 +90,13 @@
 
       <section class="block">
         <h2>5 · cutters in a row</h2>
-        <div class="seg count" id="countSeg" role="radiogroup" aria-label="cutters in a row"></div>
+        <div class="count-ctl" id="countCtl">
+          <button class="step" id="countMinus" type="button" aria-label="one fewer">−</button>
+          <input type="number" id="countNum" min="1" value="1" aria-label="cutters in a row" />
+          <button class="step" id="countPlus" type="button" aria-label="one more">+</button>
+          <button class="btn ghost caps" id="countMax" type="button">max <span id="countMaxLbl"></span></button>
+        </div>
+        <input type="range" id="countRange" class="count-range" min="1" max="2" step="1" value="1" aria-label="cutters in a row" />
         <p class="hint" id="countHint"></p>
       </section>
 
@@ -61,8 +113,9 @@
             <div data-range="rimWidth" class="sub"></div>
             <div data-range="rimThick" class="sub"></div>
             <div data-range="spacing"></div>
+            <p class="hint sub" id="spacingHint"></p>
             <label class="check"><input type="checkbox" id="mirror" checked /> <span>mirror for printing, so the cookie comes out the right way round</span></label>
-            <p class="hint">Cutters in a row share one grip plate, so they print and cut as one piece. Without a rim they are still joined by a connecting bridge. The cutter prints rim-down and is flipped to use; asymmetric shapes (heart, egg, shield, cloud) are mirrored in the print view. Use “in use” to check.</p>
+            <p class="hint">Cutters in a row always print as one piece: by default they share their cutting walls, and with a gap they share one grip plate (without a rim, a connecting bridge). The cutter prints rim-down and is flipped to use; asymmetric shapes (heart, egg, shield, cloud) are mirrored in the print view. Use “in use” to check.</p>
             <button class="btn ghost caps" id="resetDetail" type="button">back to presets</button>
           </div>
         </details>
@@ -81,10 +134,22 @@
       <footer class="dock">
         <dl class="stats" id="stats"></dl>
         <div class="dl">
-          <div class="fname" id="fname"></div>
-          <button class="btn primary caps" id="download" disabled>download stl</button>
+          <div class="fname" id="orderSummary"></div>
+          <button class="btn primary caps" id="order" type="button" disabled>order this cutter</button>
         </div>
       </footer>
+      <div class="order-panel hidden" id="orderPanel" role="dialog" aria-labelledby="orderTitle">
+        <div class="order-card">
+          <button class="chip caps close" id="orderClose" type="button">close</button>
+          <p class="caps eyebrow">your cutter · order reference <b id="orderRef"></b></p>
+          <h3 id="orderTitle"></h3>
+          <dl class="stats order-lines" id="orderLines"></dl>
+          <label class="field"><span class="lbl">configuration code (the shop prints exactly this cutter from it)</span>
+            <textarea id="orderCode" rows="3" readonly spellcheck="false"></textarea></label>
+          <div class="row"><button class="btn ghost caps" id="orderCopy" type="button">copy code</button></div>
+          <p class="soon"><b class="caps">ordering opens soon</b> Keep this code (or the reference) — you will be able to order this exact cutter here shortly.</p>
+        </div>
+      </div>
     </section>
   </main>
 </body>

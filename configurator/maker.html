@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>maker · pastrytect</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 4c4 0 5 4 9 5s3 6 2 9-1 8-5 9-6-2-9-2-6 3-9 0-1-7-2-10 0-7 4-8 6-3 10-3z' fill='none' stroke='%23282512' stroke-width='3'/%3E%3C/svg%3E" />
+  <script type="module" crossorigin src="./assets/maker-Bgvsl2gR.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/app-B_Iy6KU2.js">
+  <link rel="stylesheet" crossorigin href="./assets/app-qhjXAmVl.css">
+</head>
+<body class="maker">
+  <header class="topbar">
+    <div class="brand">
+      <span class="wordmark">pastrytect</span>
+      <span class="divider"></span>
+      <h1>maker · order code → stl</h1>
+    </div>
+    <div class="tagline caps">private · not linked from the shop</div>
+  </header>
+  <main class="layout">
+    <aside class="panel" id="panel">
+      <section class="block">
+        <h2>1 · paste the configuration code</h2>
+        <textarea id="code" spellcheck="false" placeholder="PTC1-…"></textarea>
+        <div class="row"><button class="btn primary caps" id="load" type="button">load code</button></div>
+        <p class="err" id="err"></p>
+      </section>
+      <section class="block">
+        <h2>2 · order</h2>
+        <p class="caps" id="ref"></p>
+        <h3 id="title"></h3>
+        <dl class="stats order-lines" id="lines"></dl>
+      </section>
+    </aside>
+    <section class="viewer">
+      <div id="view3d" class="view3d"></div>
+      <div class="viewbar">
+        <button class="chip caps active" id="vPrint">print view</button>
+        <button class="chip caps" id="vUse">in use</button>
+        <button class="chip caps" id="vReset">reset view</button>
+      </div>
+      <div class="status" id="status"></div>
+      <footer class="dock">
+        <dl class="stats" id="stats"></dl>
+        <div class="dl">
+          <div class="fname" id="fname"></div>
+          <button class="btn primary caps" id="download" disabled>download stl</button>
+        </div>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
