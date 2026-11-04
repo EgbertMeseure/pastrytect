@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>cookie cutter configurator · pastrytect</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 4c4 0 5 4 9 5s3 6 2 9-1 8-5 9-6-2-9-2-6 3-9 0-1-7-2-10 0-7 4-8 6-3 10-3z' fill='none' stroke='%23282512' stroke-width='3'/%3E%3C/svg%3E" />
+<style>body .topbar{padding:12px 24px}body .steps{gap:6px;display:flex}body .pill{color:var(--muted);cursor:pointer;background:0 0;border:1px solid #cfc7b6;border-radius:999px;padding:7px 13px;font-family:inherit}body .pill i{font-style:normal}body .pill.done{color:var(--ink);border-color:var(--ink)}body .pill.on{background:var(--olive);color:var(--bg);border-color:var(--olive)}body .layout{grid-template-columns:400px 1fr}body .panel{flex-direction:column;padding:0 24px;display:flex}body .stepof{color:var(--muted);margin:18px 0 0;font-size:10.5px}body .block[data-step]{border-bottom:0}body .block h2{font-size:20px}body .detail-block{border-top:1px solid var(--line);border-bottom:0;margin-top:4px}body .stepnav{background:linear-gradient(to bottom, #f6f4ef00, var(--bg) 30%);gap:10px;margin-top:auto;padding:14px 0 18px;display:flex;position:sticky;bottom:0}body .stepnav .btn{flex:1}body .stepnav .btn.ghost{flex:.6}body .stepnav .btn:disabled{opacity:.3;cursor:default}body #stepSummary{grid-template-columns:1fr;gap:6px;margin:14px 0 0;display:grid}body #stepSummary div{grid-template-columns:100px 1fr;gap:8px;display:grid}body #stepSummary dd{font-size:13px}body .viewer{padding:0 0 16px}body .dock{border:1px solid var(--line);background:#fff;border-radius:18px;margin:0 16px;padding:12px 14px 12px 20px;box-shadow:0 6px 24px #28251212}@media (max-width:820px){body .topbar{padding:10px 14px}body .topbar h1,body .divider{display:none}body .pill{letter-spacing:.06em;padding:6px 9px;font-size:10px}body .pill:not(.on) span{display:none}body .viewer{padding:0}body .panel{padding:0 16px 110px}body .stepnav{background:0 0;position:static}body .dock{z-index:30;flex-direction:row;align-items:center;gap:10px;margin:0;padding:10px 10px 10px 14px;position:fixed;bottom:8px;left:8px;right:8px}body .dock .stats{display:none}body .dock .dl{flex:1;justify-content:space-between}body .dock .fname{color:var(--ink);white-space:normal;max-height:2.8em;font-size:12.5px}body .dock .btn.primary{flex:none;padding:12px 16px}}</style>
   <script type="module" crossorigin src="./assets/main-NRwGae0X.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/app-B_Iy6KU2.js">
   <link rel="stylesheet" crossorigin href="./assets/app-qhjXAmVl.css">
@@ -16,13 +17,19 @@
       <span class="divider"></span>
       <h1>cookie cutter configurator</h1>
     </div>
-    <div class="tagline caps">pick a shape → made-to-order cutter</div>
+    <nav class="steps" id="steps" aria-label="steps">
+      <button class="pill caps" type="button" data-go="1"><i>1</i> <span>shape</span></button>
+      <button class="pill caps" type="button" data-go="2"><i>2</i> <span>size</span></button>
+      <button class="pill caps" type="button" data-go="3"><i>3</i> <span>height</span></button>
+      <button class="pill caps" type="button" data-go="4"><i>4</i> <span>order</span></button>
+    </nav>
   </header>
 
   <main class="layout">
     <aside class="panel" id="panel">
-      <section class="block">
-        <h2>1 · shape</h2>
+      <p class="caps stepof" id="stepOf"></p>
+      <section class="block" data-step="1">
+        <h2>shape</h2>
         <div class="tabs three" id="srcTabs" role="tablist">
           <button class="tab caps active" data-src="preset" role="tab" type="button">classic shapes</button>
           <button class="tab caps" data-src="image" role="tab" type="button">image</button>
@@ -72,27 +79,27 @@
         </div>
       </section>
 
-      <section class="block">
-        <h2>2 · size</h2>
+      <section class="block" data-step="2">
+        <h2>size</h2>
         <div data-range="size"></div>
         <div data-range="dimW"></div>
         <div data-range="dimL"></div>
       </section>
 
-      <section class="block">
-        <h2>3 · height</h2>
+      <section class="block" data-step="3">
+        <h2>height</h2>
         <div class="seg" id="heightSeg" role="radiogroup" aria-label="height"></div>
         <p class="hint" id="heightHint" hidden style="display:none"></p>
       </section>
 
-      <section class="block">
-        <h2>4 · cutting edge</h2>
+      <section class="block" data-step="3">
+        <h2>cutting edge</h2>
         <div class="seg" id="edgeSeg" role="radiogroup" aria-label="cutting edge"></div>
         <p class="hint" id="edgeHint"></p>
       </section>
 
-      <section class="block">
-        <h2>5 · cutters in a row</h2>
+      <section class="block" data-step="2">
+        <h2>in a row</h2>
         <div class="count-ctl" id="countCtl">
           <button class="step" id="countMinus" type="button" aria-label="one fewer">−</button>
           <input type="number" id="countNum" min="1" value="1" aria-label="cutters in a row" />
@@ -103,7 +110,13 @@
         <p class="hint" id="countHint"></p>
       </section>
 
-      <section class="block">
+      <section class="block" data-step="4">
+        <h2>order</h2>
+        <p class="hint">check your cutter, then add it to the basket.</p>
+        <dl class="stats order-lines" id="stepSummary"></dl>
+      </section>
+
+      <section class="block detail-block">
         <details class="more" id="more">
           <summary><span>detailed adjustments</span><em class="caps" id="moreState">closed</em></summary>
           <div class="more-body">
@@ -123,6 +136,10 @@
           </div>
         </details>
       </section>
+      <div class="stepnav">
+        <button class="btn ghost caps" id="stepBack" type="button">back</button>
+        <button class="btn primary caps" id="stepNext" type="button">next</button>
+      </div>
     </aside>
 
     <section class="viewer">
@@ -137,7 +154,7 @@
         <dl class="stats" id="stats"></dl>
         <div class="dl">
           <div class="fname" id="orderSummary"></div>
-          <button class="btn primary caps" id="order" type="button" disabled>order this cutter</button>
+          <button class="btn primary caps" id="order" type="button" disabled>add to basket</button>
         </div>
       </footer>
       <div class="order-panel hidden" id="orderPanel" role="dialog" aria-labelledby="orderTitle">
