@@ -30,6 +30,7 @@
         </div>
         <div class="src-panel" data-panel="preset">
           <div class="shapes" id="shapes" role="radiogroup" aria-label="shape"></div>
+          <div data-range="corners"></div>
         </div>
         <div class="src-panel hidden" data-panel="text">
           <label class="field"><span class="lbl">word or name (max 24 characters)</span>
@@ -43,9 +44,9 @@
             <div class="more-body">
               <div data-range="letterSpacing"></div>
               <div data-range="weld"></div>
-              <label class="check"><input type="checkbox" id="bar" /> <span>connecting bar under the letters</span></label>
-              <div data-range="barHeight" class="sub"></div>
-              <label class="check"><input type="checkbox" id="holes" /> <span>keep letter holes (cut out o, a, e…)</span></label>
+              <label class="check" hidden style="display:none"><input type="checkbox" id="bar" /> <span>connecting bar under the letters</span></label>
+              <div data-range="barHeight" class="sub" hidden style="display:none"></div>
+              <label class="check" hidden style="display:none"><input type="checkbox" id="holes" /> <span>keep letter holes (cut out o, a, e…)</span></label>
             </div>
           </details>
         </div>
@@ -65,7 +66,7 @@
             <div class="more-body">
               <div data-range="smooth"></div>
               <div data-range="speck"></div>
-              <label class="check"><input type="checkbox" id="keepInner" /> <span>keep inner contours as embossing</span></label>
+              <label class="check" hidden style="display:none"><input type="checkbox" id="keepInner" /> <span>keep inner contours as embossing</span></label>
             </div>
           </details>
         </div>
@@ -74,12 +75,14 @@
       <section class="block">
         <h2>2 · size</h2>
         <div data-range="size"></div>
+        <div data-range="dimW"></div>
+        <div data-range="dimL"></div>
       </section>
 
       <section class="block">
         <h2>3 · height</h2>
         <div class="seg" id="heightSeg" role="radiogroup" aria-label="height"></div>
-        <p class="hint" id="heightHint"></p>
+        <p class="hint" id="heightHint" hidden style="display:none"></p>
       </section>
 
       <section class="block">
@@ -106,6 +109,7 @@
           <div class="more-body">
             <div data-range="height"></div>
             <div data-range="wall"></div>
+            <div data-range="corner"></div>
             <label class="check"><input type="checkbox" id="taperOn" checked /> <span>thin tapered cutting edge</span></label>
             <div data-range="tip" class="sub"></div>
             <div data-range="taperLen" class="sub"></div>
@@ -115,7 +119,6 @@
             <div data-range="spacing"></div>
             <p class="hint sub" id="spacingHint"></p>
             <label class="check"><input type="checkbox" id="mirror" checked /> <span>mirror for printing, so the cookie comes out the right way round</span></label>
-            <p class="hint">Cutters in a row always print as one piece: by default they share their cutting walls, and with a gap they share one grip plate (without a rim, a connecting bridge). The cutter prints rim-down and is flipped to use; asymmetric shapes (heart, egg, shield, cloud) are mirrored in the print view. Use “in use” to check.</p>
             <button class="btn ghost caps" id="resetDetail" type="button">back to presets</button>
           </div>
         </details>
@@ -126,9 +129,8 @@
       <div id="view3d" class="view3d"></div>
       <div class="empty hidden" id="empty"><span class="caps">no outline yet</span><span id="emptyMsg"></span></div>
       <div class="viewbar">
-        <button class="chip caps active" id="vPrint">print view</button>
+        <button class="chip caps active" id="vPrint">bottom view</button>
         <button class="chip caps" id="vUse">in use</button>
-        <button class="chip caps" id="vReset">reset view</button>
       </div>
       <div class="status" id="status"></div>
       <footer class="dock">
